@@ -1,0 +1,89 @@
+@import 'variables';
+@import 'tests';
+@import 'test';
+
+* {
+  box-sizing: border-box;
+}
+
+div {
+  display: flex;
+  flex-direction: column;
+}
+
+a {
+  display: flex;
+  text-decoration: none;
+  outline: none;
+
+  &:visited {
+    color: inherit;
+  }
+}
+
+html {
+  min-height: 100%;
+  color: $dark-blue;
+}
+
+html, body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  background: $light-blue;
+  font-family: sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  display: flex;
+  flex-direction: column;
+  font-family: serif;
+  margin: 0;
+}
+
+body > header, body > main {
+  display: flex;
+  padding: 1vh 2vw 0 2vw;
+}
+
+body > header {
+  align-items: center;
+  flex-direction: row;
+  max-width: 1000px;
+  width: 100%;
+  margin: 0 auto 40px auto;
+
+  h1 {
+    font-size: 3em;
+  }
+}
+
+main {
+  flex: 1;
+  flex-direction: column;
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+header #Run {
+  cursor: pointer;
+  margin-left: auto;
+  padding: 8px 12px;
+  border: 1px solid $gray-blue;
+  border-radius: 2px;
+  box-shadow: inset 0 1px 0 0 transparent;
+  font-size: 0.6em;
+  font-weight: bold;
+  text-transform: uppercase;
+
+  transition: box-shadow ease 0.1s;
+
+  &:hover:not(:active) {
+    box-shadow: inset 0 1px 0 0 $white;
+  }
+
+  &:active {
+    box-shadow: inset 0 0 0 1px lighten($gray-blue, 20%);
+  }
+}

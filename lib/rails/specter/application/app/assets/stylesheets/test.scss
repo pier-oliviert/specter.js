@@ -1,0 +1,37 @@
+#Test section.result > header {
+  display: flex;
+  padding: 8px 12px;
+  align-items: center;
+
+  & > div.status {
+    margin-right: 1em;
+  }
+}
+
+
+#Test section.result > header.error {
+  background-color: $light-red;
+  color: $red;
+}
+
+#Test section.result > header.success {
+  background-color: $light-green;
+  color: $green;
+}
+
+#Test section.result pre {
+  position: relative;
+  margin: 32px 0;
+}
+
+#Test section.result pre > span.label {
+  position: absolute;
+  right: 12px;
+  top: 0;
+  font-size: 0.5em;
+  background: $gray-blue;
+  padding: 4px 8px;
+  text-shadow: none;
+  border-radius: 0 0 2px 2px;
+  color: $light-blue;
+}
