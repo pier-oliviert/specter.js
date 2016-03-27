@@ -4,7 +4,7 @@ $:.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'version'
 
 Gem::Specification.new do |s|
-  s.name        = 'specter.js'
+  s.name        = 'specterjs'
   s.version     = Specter::VERSION
   s.summary     = 'Testing solution for JavaScript environment'
 
