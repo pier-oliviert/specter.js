@@ -1,0 +1,30 @@
+<%= javascript_include_tag 'specter', 'data-turbolinks-track' => true %>
+<%= javascript_include_tag *Specter.javascripts, 'data-turbolinks-track' => true %>
+
+<%= raw @test.content %>
+
+<script>
+  document.addEventListener.native.bind(document)('DOMContentLoaded', function() {
+    try {
+      Specter.run();
+      if (window.parent !== undefined) {
+        window.parent.postMessage({
+          status: 'success'
+        }, '*')
+      } else {
+        console.log("Test successfully complete")
+      }
+    } catch(e) {
+      if (window.parent !== undefined) {
+        window.parent.postMessage({
+          status: 'error',
+          error: e.toString()
+        }, '*')
+      } else {
+        console.log(e)
+      }
+    }
+  });
+
+</script>
+

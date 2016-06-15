@@ -1,0 +1,12 @@
+{
+  "name": "specter.js",
+    "devDependencies": {
+      "express": "latest",
+      "ejs": "latest",
+      "html": "latest",
+      "webpack": "latest"
+    },
+    "scripts": {
+      "start": "node task/server.js"
+    }
+}

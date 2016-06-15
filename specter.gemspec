@@ -1,4 +1,4 @@
-lib = File.expand_path('../lib/rails', __FILE__)
+lib = File.expand_path('../rails/lib', __FILE__)
 $:.unshift(lib) unless $LOAD_PATH.include?(lib)
 
 require 'version'
@@ -19,10 +19,10 @@ Gem::Specification.new do |s|
   s.files         = `git ls-files -z`.split("\x0")
   s.files         += Dir['README.md']
 
-  s.require_path  = 'lib/rails'
+  s.require_path  = 'rails/lib'
 
   s.add_runtime_dependency 'thin', '~> 1.6'
-  s.add_runtime_dependency 'rails', '~> 4.2'
+  s.add_runtime_dependency 'rails'
 
 end
 
