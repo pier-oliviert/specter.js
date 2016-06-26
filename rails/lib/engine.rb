@@ -11,7 +11,12 @@ module Specter
     paths.add 'config/routes.rb', with: 'lib/routes.rb'
 
     initializer :test_path do
-      paths.add 'test/javascript', with: Rails.root + 'test/javascript', glob: '**/*.html'
+      if paths['test/javascript'].nil?
+        paths.add 'test/javascript', with: Rails.root + 'test/javascript'
+      end
+
+      path = paths['test/javascript']
+      path.glob = '**/*.html'
     end
 
     initializer :assets do
