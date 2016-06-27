@@ -14,9 +14,6 @@ module Specter
       if paths['test/javascript'].nil?
         paths.add 'test/javascript', with: Rails.root + 'test/javascript'
       end
-
-      path = paths['test/javascript']
-      path.glob = '**/*.html'
     end
 
     initializer :assets do
