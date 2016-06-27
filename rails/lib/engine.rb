@@ -6,6 +6,7 @@ module Specter
     paths['app/controllers'] << 'lib/controllers'
     paths['app/models'] << 'lib/models'
     paths['app/views'] << 'lib/views'
+    paths['app/helpers'] << 'lib/helpers'
     paths['app/assets'] << 'lib/assets'
     paths['app/assets'] << '../'
     paths.add 'config/routes.rb', with: 'lib/routes.rb'
@@ -16,12 +17,13 @@ module Specter
       end
 
       path = paths['test/javascript']
-      path.glob = '**/*.html'
+      path.glob = nil
     end
 
     initializer :assets do
       config.assets.precompile += %w(runner.js specter.js specter.css)
       Specter.javascripts ||= %w(application)
     end
+
   end
 end

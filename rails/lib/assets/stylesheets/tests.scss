@@ -7,6 +7,10 @@ ul.tests {
   margin: 0;
 }
 
+ul.tests > li {
+  padding: 8px 12px;
+}
+
 ul.tests > li:not(.empty) {
   display: flex;
   justify-content: center;
@@ -15,11 +19,12 @@ ul.tests > li:not(.empty) {
 }
 
 ul.tests li.empty {
-  margin: 15vh 0;
   text-align: center;
-  text-shadow: 0 1px 0 white;
   color: $gray-blue;
+  font-size: 0.8em;
+  font-style: italic;
 }
+
 
 ul.tests > li a {
   margin-right: auto;

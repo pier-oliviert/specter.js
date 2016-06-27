@@ -1,8 +1,8 @@
-<%= content_tag :li, class: %w(test), data: { status: 'idle', run: run_test_path(id:test.name) } do %>
+<%= content_tag :li, class: %w(test), data: { status: 'idle', run: run_test_path(group, test) } do %>
   <div class="status" data-error="❌" data-success="✓">
   </div>
   <div>
-    <%= link_to test.name.capitalize, test_path(id: test.name) %>
+    <%= link_to test.name.capitalize, test_path(group, test) %>
     <span class="message"></span>
   </div>
 <% end %>
