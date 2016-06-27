@@ -4,11 +4,16 @@
 
 
 <main>
-  <ul class="tests">
-    <% if @tests.any? %>
-      <%= render partial: 'test', collection: @tests, as: :test %>
-    <% else %>
-      <li class='empty'>No test to run yet.</li>
-    <% end %>
-  </ul>
+  <% @groups.each do |group| %>
+    <section class='group'>
+      <%= content_tag :h3, group.name %>
+      <ul class="tests">
+        <% if group.tests.any? %>
+          <%= render partial: 'test', collection: group.tests, as: :test %>
+        <% else %>
+          <li class='empty'>No test to run yet.</li>
+        <% end %>
+      </ul>
+    </section>
+  <% end %>
 </main>
