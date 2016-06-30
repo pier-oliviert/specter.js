@@ -1,7 +1,9 @@
 class Test {
   constructor() {
     this.xhr = {}
-    this.assert = new Specter.Assertions();
+  }
+
+  prepare() {
     this.workspace = document.querySelector('[data-workspace]');
     this.expected = document.querySelector('[data-expected]');
     this.expected.remove();
@@ -13,8 +15,8 @@ class Test {
   setup() {
   }
 
-  test() {
+  execute() {
   }
 }
 
-window.Specter.Test = Test;
+window.Specter.Test = new Test();

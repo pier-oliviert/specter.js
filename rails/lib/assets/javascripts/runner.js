@@ -9,7 +9,6 @@ class Runner {
     this.tests = tests
 
     this.button.addEventListener('click', this.start.bind(this));
-    window.addEventListener('message', this.received.bind(this), false);
   }
 
   start() {
@@ -30,32 +29,40 @@ class Runner {
       document.body.appendChild(iframe)
 
       test.iframe = iframe
-      iframe.contentWindow.listElement = test
+      iframe.contentWindow.addEventListener('error', this.received.bind(this, test))
+      window.addEventListener('message', this.received.bind(this, test));
     }
   }
 
-  received(message) {
-    var test = message.source.listElement
-
-    if (message.data.status === 'success') {
-      test.dataset.status = 'success'
-      var status = test.querySelector('div.status')
-      status.textContent = status.dataset.success
-    }
-    else {
-      test.dataset.status = 'failed'
-      var status = test.querySelector('div.status')
-      status.textContent = status.dataset.error
-      var span = test.querySelector('div > span')
-      span.textContent = message.data.error
-    }
-
+  received(test, event) {
     this.count -= 1
-    message.source.listElement.iframe.remove()
+    test.iframe.remove()
+
+    if (!event.data) {
+      this.failed(test, event.message)
+      return
+    }
+    switch(event.data.status) {
+      case 'success':
+        test.dataset.status = 'success'
+        var status = test.querySelector('div.status')
+        status.textContent = status.dataset.success
+        break
+      default:
+        this.failed(test, event.data.error)
+    }
 
     if (this.count <= 0) {
       this.button.dataset.running = 'false'
     }
+  }
+
+  failed(test, message) {
+    test.dataset.status = 'failed'
+    var status = test.querySelector('div.status')
+    status.textContent = status.dataset.error
+    var span = test.querySelector('div > span')
+    span.textContent = message
   }
 }
 
