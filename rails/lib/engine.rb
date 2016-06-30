@@ -21,7 +21,7 @@ module Specter
     end
 
     initializer :assets do
-      config.assets.precompile += %w(runner.js specter.js specter.css)
+      config.assets.precompile += %w(runner.js specter.js test.js specter.css)
       Specter.javascripts ||= %w(application)
     end
 

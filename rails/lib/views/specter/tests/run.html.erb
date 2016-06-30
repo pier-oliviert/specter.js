@@ -5,23 +5,25 @@
 
 <script>
   document.addEventListener.native.bind(document)('DOMContentLoaded', function() {
+    message = {}
+
     try {
       Specter.run();
-      if (window.parent !== undefined) {
-        window.parent.postMessage({
-          status: 'success'
-        }, '*')
-      } else {
-        console.log("Test successfully complete")
-      }
+
+      message.status = 'success'
+
     } catch(e) {
+
+      message.status = 'error'
+      message.error = e.toString()
+
+    } finally {
+
+      message.actual = window.Specter.Test.workspace.outerHTML
+      message.expected = window.Specter.Test.expected.outerHTML
+
       if (window.parent !== undefined) {
-        window.parent.postMessage({
-          status: 'error',
-          error: e.toString()
-        }, '*')
-      } else {
-        console.log(e)
+        window.parent.postMessage(message, '*')
       }
     }
   });

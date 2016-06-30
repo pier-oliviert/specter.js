@@ -7,19 +7,14 @@
     }
 
     received(message) {
-      var result = this.readableOutput(message.source.document.querySelector('#SpecterTestWrapper > div').innerHTML)
+      document.querySelector('section.result pre.actual > code').textContent = this.readableOutput(message.data.actual)
+      document.querySelector('section.result pre.expected > code').textContent = this.readableOutput(message.data.expected)
       var container = document.querySelector('#Test section.result')
       var header = container.querySelector('header')
       var code = container.querySelector('pre.real > code')
       var pres = container.querySelectorAll('pre')
-      var line = this.lineNumber(result, message.data.html)
-
-      code.textContent = result
 
       if (message.data.status == 'error') {
-        Array.prototype.forEach.call(pres, function(pre) {
-          pre.dataset.line = line
-        }, this)
 
         header.classList.add('error')
         header.querySelector('div.status').textContent = "❌"

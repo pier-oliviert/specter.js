@@ -4,11 +4,11 @@
       <div class='status'></div>
       <div class='message'></div>
     </header>
-    <pre class="real line-numbers"><span class='label'>Result</span><code class='language-html'></code></pre>
+    <pre class="actual line-numbers"><span class='label'>Result</span><code class='language-html'></code></pre>
     <pre class="expected line-numbers"><span class='label'>Expected</span><code class='language-html'></code></pre>
   </section>
 
-  <%= content_tag :iframe, nil, src: test_path(id: @test.pathname.basename.to_s) %>
+  <%= content_tag :iframe, nil, src: run_test_path(@group, @test) %>
 </main>
 
 <%= javascript_include_tag 'test', 'data-turbolinks-track' => true %>

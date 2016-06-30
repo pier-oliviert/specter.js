@@ -6,12 +6,17 @@ class Specter::TestsController < Specter::ApplicationController
   end
 
   def show
-    file = paths.select do |file|
-      path = Pathname.new(file) + params[:id]
-      path.exist?
+    @group = groups.select do |group|
+      group.name.eql? params[:group]
     end.first
 
-    @test = Specter::Test.new(Pathname.new(file))
+    if @group.nil?
+      redirect_to :index and return
+    end
+
+    @test = @group.tests.select do |test|
+      test.name.eql? params[:id]
+    end.first
   end
 
   def run

@@ -8,6 +8,8 @@ Specter.compare = function(real, expected) {
     forceTextNodeOnEmptyNode(real);
     forceTextNodeOnEmptyNode(expected);
 
+    compareChildren(real, expected);
+
     for (var i = 0; i < real.childNodes.length; i++) {
       Specter.compare(real.childNodes[i], expected.childNodes[i]);
     }
@@ -18,6 +20,20 @@ Specter.compare = function(real, expected) {
   compareTextContent(real, expected)
 
   return true;
+}
+
+function compareChildren(node, expected) {
+  if (node) {
+    node.normalize();
+  }
+
+  if (expected) {
+    expected.normalize();
+  }
+
+  if ((node.childNodes || []).length !== (expected.childNodes || []).length) {
+    throw new Specter.Error(node, expected, "Not the same number of child")
+  }
 }
 
 function compareAttributes(node, expected) {
@@ -51,12 +67,20 @@ function compareTextContent(node, expected) {
 }
 
 function forceTextNodeOnEmptyNode(node) {
+  if (!node) {
+    return;
+  }
+
   if (node.nodeType === Element.ELEMENT_NODE && node.childNodes.length === 0) {
     node.appendChild(document.createTextNode(''))
   }
 }
 
 function removeBlankNode(node) {
+  if (!node) {
+    return;
+  }
+
   Array.prototype.forEach.call(node.childNodes || [], function(node) {
     if (node.textContent.length === 0 || /^\s*$/.test(node.textContent)) {
       node.remove();
