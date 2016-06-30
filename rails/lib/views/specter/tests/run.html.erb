@@ -21,9 +21,10 @@
 
       message.actual = window.Specter.Test.workspace.outerHTML
       message.expected = window.Specter.Test.expected.outerHTML
+      message.reference = window.location.pathname
 
       if (window.parent !== undefined) {
-        window.parent.postMessage(message, '*')
+        window.parent.postMessage(message, window.location.href)
       }
     }
   });

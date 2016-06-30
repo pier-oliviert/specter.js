@@ -35,6 +35,10 @@ class Runner {
   }
 
   received(test, event) {
+    if (test.dataset.run !== event.data.reference) {
+      return
+    }
+
     this.count -= 1
     test.iframe.remove()
 
