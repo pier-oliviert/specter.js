@@ -4,6 +4,20 @@
   class Test {
     constructor(element) {
       window.addEventListener('message', this.received.bind(this), false);
+      var iframe = document.querySelector('iframe')
+      iframe.contentWindow.addEventListener('error', this.failed.bind(this, iframe))
+    }
+
+    failed(iframe, event) {
+
+      var container = document.querySelector('#Test section.result')
+      var header = container.querySelector('header')
+      header.classList.add('error')
+      header.querySelector('div.status').textContent = "❌"
+      header.querySelector('div.message').textContent = event.message
+
+      container.querySelector('pre.actual > code').textContent = this.readableOutput(iframe.contentWindow.document.body.innerHTML)
+      container.querySelector('pre.expected').remove()
     }
 
     received(message) {
