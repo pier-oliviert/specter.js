@@ -35,6 +35,11 @@ class Runner {
   }
 
   received(test, event) {
+    if (!event.data) {
+      this.failed(test, event.message)
+      return
+    }
+
     if (test.dataset.run !== event.data.reference) {
       return
     }
@@ -42,10 +47,6 @@ class Runner {
     this.count -= 1
     test.iframe.remove()
 
-    if (!event.data) {
-      this.failed(test, event.message)
-      return
-    }
     switch(event.data.status) {
       case 'success':
         test.dataset.status = 'success'
